@@ -5,40 +5,37 @@ public class Ejercito {
     private int tanque;
     private int buque;
     private int vida;
-    private int muerto;
-    private int vivo;
     private int disparo;
+    private int vivo;
+    private int escudo; 
 
-    public int getMuerto() {
-        if (getVida() == 0) {
-            setMuerto(1);
-        }
-        else {
-            setVivo(0);
-        }
-        return muerto;
-    }
-    public int getVivo() {
-        if (getVida() == 1) {
-            setVivo(1);
-        }
-        else {
-            setMuerto(0);
-        }
-        return vivo;
-    }
-    public void setMuerto(int muerto) {
-        this.muerto = muerto;
-    }
-    public void setVivo(int vivo) {
-        this.vivo = vivo;
-    }
-    
-
-    public Ejercito(int soldado, int tanque, int buque ) {
+    public Ejercito(int soldado, int tanque, int buque, int escudo) {
         this.soldado = soldado;
         this.tanque = tanque;
         this.buque = buque;
+        this.escudo = escudo;
+    }
+
+
+    public  void recibe(int disparo) {
+        if (escudo > 0) {
+            escudo -= disparo; 
+            if (escudo < 0) { 
+                setVida(getVida()+ escudo /2); 
+                escudo = 0; 
+            }
+        } else {
+            setVida(getVida() - disparo); 
+        }
+        if (getVida() <= 0) {
+            setMuerto();
+        } else { 
+            setVivo(); 
+        } 
+        if(getVida() == 0){
+
+        }
+
     }
 
     public int getSoldado() {
@@ -51,11 +48,6 @@ public class Ejercito {
         return buque;
     }
 
-    public int getVida() {
-        return vida;
-    }
-
-
     public boolean vidainicial(int vida) {
         setVida(getVida()+vida);
         return false;
@@ -67,13 +59,38 @@ public class Ejercito {
     public int setDisparo(int i) {
         return disparo = i;
     }
+    
     public int getDisparo() {
         return disparo;
     }
 
-    public  void recibe(int disparo) {
-      setVida(getVida()-disparo);
+
+    public int getVida() {
+        return vida;
+    }
+
+    public boolean getMuerto() {
+        return getVida() == 0; 
+    }
+      
+    public int setMuerto() {
+        return 0;
+    }
+
+    public boolean getVivo() {
+        return getVida() > 0; 
+    }
+
+    public int setVivo() {
+        return vivo;
     }
     
-    
+    public int getEscudo() {
+        return escudo;
+    }
+    public void setEscudo(int escudo) {
+        this.escudo = escudo;
+   
+    }
 }
+    
